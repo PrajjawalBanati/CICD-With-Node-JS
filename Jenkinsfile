@@ -4,8 +4,11 @@ pipeline {
         registryCredential = "dockerhub"
         dockerImage=''
     }
-    agent any
-    tools {nodejs "node"}
+    agent {
+        docker{
+            image 'node:latest'
+        }
+    }
     stages {
         stage('Cloning Git')
         {
