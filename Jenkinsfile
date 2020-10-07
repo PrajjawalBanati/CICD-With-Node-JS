@@ -1,14 +1,43 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:latest' 
-            args '-p 3000:3000' 
-        }
+    environment{
+        registry = "prajjawalbanati/my-node-app"
+        registryCredential = "dockerhub"
+        dockerImage=''
     }
+    agent any
+    tools {nodejs "node"}
     stages {
+        stage('Cloning Git')
+        {
+            steps{
+                git 'https://github.com/PrajjawalBanati/my-node-app'
+            }
+        }
         stage('Build') { 
             steps {
-                sh 'npm install' 
+                sh 'npm install'
+            }
+        }
+
+        stage('Building Image') { 
+            steps {
+                script{
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+        stage('Building Image') { 
+            steps {
+                script{
+                        docker.withRegistry('',registryCredential){
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
