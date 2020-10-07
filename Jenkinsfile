@@ -9,7 +9,7 @@ pipeline {
             image 'node:latest'
         }
     }
-    stages {
+    stages{
         stage('Cloning Git')
         {
             steps{
@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('Building Image') { 
+        stage('Pushing Image') { 
             steps {
                 script{
                         docker.withRegistry('',registryCredential){
