@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                git 'https://github.com/PrajjawalBanati/my-node-app'
                 sh 'npm install' 
             }
         }
