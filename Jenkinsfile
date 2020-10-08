@@ -4,16 +4,14 @@ pipeline {
         registryCredential = "dockerhub"
         dockerImage=''
     }
-    agent {
-        docker{
-            image 'node:latest'
-        }
-    }
+    agent any
     stages{
         stage('Installing Docker Client')
         {
-            def dockerHome = tool 'mydocker'
+            steps{
+                def dockerHome = tool 'mydocker'
             env.PATH= "${dockerHome}/bin:${env.path}"
+            }
             // steps{
 
             //         //sh "curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
