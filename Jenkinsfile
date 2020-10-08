@@ -4,14 +4,19 @@ pipeline {
         registryCredential = "dockerhub"
         dockerImage=''
     }
-    agent { docker { image 'node:latest'}}
+    agent {
+        docker{
+            image 'node:latest'
+        }
+    }
     stages{
         stage('Installing Docker Client')
         {
-            steps
-            {
-                def dockerHome = tool 'mydocker'
-                env.PATH= "${dockerHome}/bin:${env.path}"
+            steps{
+                def dockerHome = tool 'myDocker'
+                script{
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                }
             }
         }
         stage('Cloning Git')
