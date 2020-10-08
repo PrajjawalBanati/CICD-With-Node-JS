@@ -16,40 +16,8 @@ pipeline {
                 script{
                     def dockerHome = tool 'mydocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
+                    sh "docker --version"
                 }
-            }
-        }
-        stage('Cloning Git')
-        {
-            steps{
-                git 'https://github.com/PrajjawalBanati/my-node-app'
-            }
-        }
-        stage('Build') { 
-            steps {
-                sh 'npm install'
-            }
-        }
-
-        stage('Building Image') { 
-            steps {
-                script{
-                    sh 'docker build -t prajjwalbanati/my-node-app .'
-                }
-            }
-        }
-        stage('Pushing Image') { 
-            steps {
-                script{
-                        docker.withRegistry('',registryCredential){
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-        stage('Remove Unused docker image') {
-            steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
     }
