@@ -4,23 +4,15 @@ pipeline {
         registryCredential = "dockerhub"
         dockerImage=''
     }
-    agent any
+    agent { docker { image 'node:latest'}}
     stages{
         stage('Installing Docker Client')
         {
-            steps{
+            steps
+            {
                 def dockerHome = tool 'mydocker'
-            env.PATH= "${dockerHome}/bin:${env.path}"
+                env.PATH= "${dockerHome}/bin:${env.path}"
             }
-            // steps{
-
-            //         //sh "curl -fsSLO https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz \
-            //         // && tar xzvf docker-17.04.0-ce.tgz \
-            //         //  && sudo mv docker/docker /usr/local/bin \
-            //         //   && rm -r docker docker-17.04.0-ce.tgz"
-
-
-            // }
         }
         stage('Cloning Git')
         {
