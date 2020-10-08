@@ -13,8 +13,8 @@ pipeline {
         stage('Installing Docker Client')
         {
             steps{
-                def dockerHome = tool 'myDocker'
                 script{
+                    def dockerHome = tool 'myDocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
                 }
             }
