@@ -14,7 +14,7 @@ pipeline {
         {
             steps{
                 script{
-                    def dockerHome = tool 'myDocker'
+                    def dockerHome = tool 'mydocker'
                     env.PATH = "${dockerHome}/bin:${env.PATH}"
                 }
             }
