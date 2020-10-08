@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "abhinavs03/midsem-project"
+    registry = "prajjawalbanati/my-node-app"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
@@ -13,7 +13,7 @@ pipeline {
     }
     stage('Build') {
        steps {
-         sh 'docker build -t flask-todo .'
+         sh 'docker build -t my-node-app .'
        }
     }
     stage('Building image') {
