@@ -2,7 +2,7 @@
 [
     {
       "name": "first",
-      "image": "docker.io/prajjawalbanati/my-node-app:1.0",
+      "image": "docker.io/prajjawalbanati/my-node-app:5",
       "cpu": 10,
       "memory": 512,
       "essential": true,
